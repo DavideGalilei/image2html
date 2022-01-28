@@ -66,8 +66,7 @@ proc convertToHtml*(image: Image, size: string = "20em", tabSize: int = tabSize)
         )
 
       var skip = 1
-      while row > 1 and (column + skip) < image.width and image.data[pos] == image.data[pos + skip]:
-        # echo "skipped: ", skip
+      while (column + skip) < image.width and image.data[pos] == image.data[pos + skip]:
         inc skip
       # echo "current_ ", row, " - ", column, " - ", row * image.height + column + skip
       var props = @{
@@ -78,7 +77,7 @@ proc convertToHtml*(image: Image, size: string = "20em", tabSize: int = tabSize)
         props.add(("colspan", $skip))
 
       tableRow.children.add(Tag(
-        name: "th",
+        name: "td",
         properties: props,
       ))
       inc column, skip
